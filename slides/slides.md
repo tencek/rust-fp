@@ -152,7 +152,7 @@ fn test_coffee_machine() {
 - immutable
 - shadowing (expression evaluation)
 
-💚 Rust looks very FP-like.
+### 💚 A++
 
 [demo_01_let.rs](https://github.com/tencek/rust-fp/tree/main/demos/src)
 
@@ -364,7 +364,7 @@ pub fn choose_cup_color(espresso: Espresso) -> String {
 - Pattern matching
 - A struct in an enum 
 
-## 💚 A++
+### 💚 A++
 
 [demo_03_algebraic_data_types.rs](https://github.com/tencek/rust-fp/tree/main/demos/src)
 
