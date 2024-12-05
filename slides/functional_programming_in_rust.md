@@ -26,7 +26,7 @@ Pavel Kučera (*1983)
 
 ## Rust and FP
 
-Let's see what FP features we can use in Rust.
+Let's see which FP features we can use in Rust.
 
 ## 💚 💛 🧡 💔
 
@@ -491,6 +491,12 @@ Does not work either - because of `FnOnce`.
 
 [demo_04_partial_application.rs](https://github.com/tencek/rust-fp/tree/main/demos/src)
 [demo_04_curried.rs](https://github.com/tencek/rust-fp/tree/main/demos/src)
+
+------------------------------------------------------------------
+
+## Recap
+
+### Pure function, Total function, immutability, `let`, shadowing, partial functions, sum type, product type, tuple, pattern matching, destructuring, cardinality, currying, partial application, 
 
 ------------------------------------------------------------------
 
