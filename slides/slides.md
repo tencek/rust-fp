@@ -15,7 +15,7 @@ footer: github.com/tencek/rust-fp
 
 ![bg right:45%](./img/me.jpg)
 
-Pavel Kučera
+Pavel Kučera (*1983)
 
 - C++ developer since ~2006
 - C#/.NET developer since ~2015
@@ -24,11 +24,15 @@ Pavel Kučera
 
 ------------------------------------------------------------------
 
-<!-- paginate: true -->
+## Rust and FP
 
-What Rust looks like from the FP point of view. What I was looking for, what I have found, what I am missing.
+Let's see what FP features we can use in Rust.
+
+## 💚 💛 🧡 💔
 
 ------------------------------------------------------------------
+
+<!-- paginate: true -->
 
 ## What is Functional Programming?
 
@@ -370,33 +374,140 @@ pub fn choose_cup_color(espresso: Espresso) -> String {
 
 ------------------------------------------------------------------
 
-## Currying, partial application
+## 04 - Currying, partial application
+
+Cuurrying and partial aplication 
+
+### Motivation
+
+- Function has single input
+- "I want more!" (-:
+- A function can return a function...
 
 ------------------------------------------------------------------
 
-## Higher order functions
+### Currying
+
+- Named after [Haskell Brooks Curry](https://en.wikipedia.org/wiki/Haskell_Curry)
+- *F(x,y,z) => F(x)(y)(z)*
+- What is it good for? **Partial application**.
+- in FP languages, the currying is automatic
+- in Rust, currying is not automatic
+- We can make it manually
+- We can use macros
 
 ------------------------------------------------------------------
 
-## Pattern matching
+### Partial application
+
+- Create a function G out of function F by fixing some of F's arguments
+- Can utilize **Currying** if available
+- May be done manually as well
+- Examples
+  - Building web requests (fixing base url)
+  - Logging (fixing severity)
+  - Making a coffee
 
 ------------------------------------------------------------------
 
-## Function composition
+### Partial application - no currying
+
+```rust
+// standard function, no cyrrying
+pub fn make_espresso(strength: Strength, size: Size) -> Espresso {
+    Espresso { strength, size }
+}
+```
+
+```rust
+let espresso = make_espresso(Strength::Strong, Size::Small);
+```
+
+```rust
+let make_strong = |size| make_espresso(Strength::Strong, size);
+
+let strong_small = make_strong(Size::Small);
+let strong_medium = make_strong(Size::Medium);
+let strong_large = make_strong(Size::Large);
+```
 
 ------------------------------------------------------------------
 
-## Recursion
+### Partial application - manual currying
+
+```rust
+// curried function
+pub fn make_espresso(strength: Strength) -> impl Fn(Size) -> Espresso {
+    move |size| Espresso { strength, size }
+}
+```
+
+```rust
+let espresso = make_espresso(Strength::Strong)(Size::Small);
+```
+
+```rust
+let make_strong = make_espresso(Strength::Strong);
+let espresso_small = make_strong(Size::Small);
+let espresso_medium = make_strong(Size::Medium);
+let espresso_large = make_strong(Size::Large);
+```
+
+Does not work for more than 2 arguments - [#99697](https://github.com/rust-lang/rust/issues/99697)
 
 ------------------------------------------------------------------
 
-## Skipped
-# Recursive types
-# new type
-# unit type
+### Partial application - `curried` crate
+
+```rust
+use curried::curry;
+
+#[curry]
+pub fn make_espresso(beans: Beans, strength: Strength, size: Size) -> Espresso {
+    Espresso { beans, strength, size, }
+}
+
+let make_robusta = make_espresso(Beans::Robusta);
+let make_strong_robusta = make_robusta(Strength::Strong);
+
+let strong_small = make_strong_robusta(Size::Small);
+let strong_medium = make_strong_robusta(Size::Medium);
+let strong_large = make_strong_robusta(Size::Large);
+```
+
+Utilizes `Box<dyn FnOnce>`
+Does not work either - because of `FnOnce`.
 
 ------------------------------------------------------------------
 
+## 04 - Currying, partial application
+
+### Summary
+- Currying not supported natively
+  - Workarounds exists but are limited
+- Partial application possible, though
+
+### 💛 B-
+
+[demo_04_partial_application.rs](https://github.com/tencek/rust-fp/tree/main/demos/src)
+[demo_04_curried.rs](https://github.com/tencek/rust-fp/tree/main/demos/src)
+
 ------------------------------------------------------------------
 
-## 💚 💛 🧡 💔
+## 05 - Todo
+
+```rust
+todo!("Recursive types")
+todo!("new type")
+todo!("unit type")
+todo!("Higher order functions")
+todo!("Function composition")
+todo!("Function passing")
+todo!("Recursion")
+```
+
+------------------------------------------------------------------
+
+## 06 - Q/A
+
+
