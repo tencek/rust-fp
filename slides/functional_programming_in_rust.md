@@ -249,7 +249,7 @@ pub enum CoffeeOrder {
 ## `enum` - why **sum** type?
 - The cardinality (number of possible values) are the sum of the cardinalities of all the variants
 
-### Quiz
+### Quiz I
 What is the cardinality of `Bean` type?
 ```rust
 pub enum Bean {
@@ -309,7 +309,7 @@ pub struct Espresso {
 
 - The cardinality (number of possible values) is the product of cardinalities of all the fields
 
-### Quiz
+### Quiz II
 
 What is the cardinality of `Espresso`?
 
@@ -510,4 +510,4 @@ todo!("Recursion")
 
 ## 06 - Q/A
 
-
+![bg 40%](./img/qr-code.png)
