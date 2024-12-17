@@ -205,6 +205,7 @@ pub fn count_beans(portion_weight_mg: i32, bean_weight_mg: i32) -> Option<i32> {
 
 ### Summary
  - Rust is even more FP than e.g. F#
+ - `PartialEq`, `PartialOrd`
 
 ### 💚 A++ 
 
